@@ -44,6 +44,13 @@ header {
   margin: 0 auto 2rem;
 }
 
+.rightList{
+  display: flex;
+  height: 600px;
+  flex-direction: column;
+  width: 100%;
+}
+
 @media (min-width: 1024px) {
   header {
     display: flex;
@@ -54,19 +61,16 @@ header {
     margin: 0 2rem 0 0;
   }
 
+  .rightList{
+    width: 800px;
+  }
+
   /* header .wrapper {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
   } */
 
-}
-
-.rightList{
-  display: flex;
-  height: 600px;
-  flex-direction: column;
-  width: 800px;
 }
 
 .backBtn{
