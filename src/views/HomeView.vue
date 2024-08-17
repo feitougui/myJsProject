@@ -10,7 +10,7 @@ const homeTitle = ref('myJsProject')
 watch(()=>route,(oldValue)=>{
   console.log('路由信息',oldValue)
   if(oldValue.meta.title){
-    homeTitle.value = oldValue.meta.title
+    homeTitle.value = oldValue.meta.title as string
   }else{
     homeTitle.value = 'myJsProject'
   }
