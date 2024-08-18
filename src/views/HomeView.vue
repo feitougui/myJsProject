@@ -1,50 +1,61 @@
 <script setup lang="ts">
-import { ref,onMounted,watch } from "vue";
-import { RouterLink, RouterView,useRoute,useRouter} from 'vue-router'
-import { ArrowLeft} from '@element-plus/icons-vue'
+import { ref, onMounted, watch } from 'vue'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
+import { ArrowLeft } from '@element-plus/icons-vue'
 import TheSubjectCategory from '../components/TheSubjectCategory.vue'
 import TheTitle from '../components/TheTitle.vue'
 const route = useRoute()
 const router = useRouter()
 const homeTitle = ref('myJsProject')
-watch(()=>route,(oldValue)=>{
-  console.log('路由信息',oldValue)
-  if(oldValue.meta.title){
-    homeTitle.value = oldValue.meta.title as string
-  }else{
-    homeTitle.value = 'myJsProject'
-  }
-},{ deep: true })
+watch(
+  () => route,
+  (oldValue) => {
+    if (oldValue.meta.title) {
+      homeTitle.value = oldValue.meta.title as string
+    } else {
+      homeTitle.value = 'myJsProject'
+    }
+  },
+  { deep: true }
+)
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/kwy.png" width="480px" height="480px" />
+    <div class="logo"></div>
 
     <div class="rightList">
       <TheTitle class="title" :msg="homeTitle" />
-      <el-button v-if="route.name!=='home'" class="backBtn" :icon="ArrowLeft" @click="router.back()">返回</el-button>
-      <TheSubjectCategory v-if="route.name==='home'"/>
+      <el-button
+        v-if="route.name !== 'home'"
+        class="backBtn"
+        :icon="ArrowLeft"
+        @click="router.back()"
+        >返回</el-button
+      >
+      <TheSubjectCategory v-if="route.name === 'home'" />
       <!-- nodte分类 -->
-      <RouterView class="RouterView"/>
+      <RouterView class="RouterView" />
     </div>
   </header>
-  
-  
 </template>
 
 <style scoped>
 header {
+  height: auto;
   line-height: 1.5;
   max-height: 100vh;
 }
 
 .logo {
-  display: block;
+  width: calc(100vw - 4rem);
+  height: calc(100vw - 4rem);
   margin: 0 auto 2rem;
+  background: url('@/assets/kwy.png') no-repeat center;
+  background-size: contain;
 }
 
-.rightList{
+.rightList {
   display: flex;
   height: 600px;
   flex-direction: column;
@@ -58,10 +69,12 @@ header {
   }
 
   .logo {
+    width: 480px;
+    height: 480px;
     margin: 0 2rem 0 0;
   }
 
-  .rightList{
+  .rightList {
     width: 800px;
   }
 
@@ -70,16 +83,14 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   } */
-
 }
 
-.backBtn{
-  width:60px;
-  margin-bottom: 10px
+.backBtn {
+  width: 60px;
+  margin-bottom: 10px;
 }
 
-.RouterView{
+.RouterView {
   flex: 1 1 auto;
 }
 </style>
-
